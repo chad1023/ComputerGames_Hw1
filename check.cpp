@@ -127,11 +127,11 @@ bool check(int &n,vector<vector<int> > &col_hint,vector<string > board)//check i
     if(num<n){
         return true;
     }
-    // cout<<"success!!"<<endl;
-    // for(int i=0;i<n;i++)
-    // {
-    //     cout<<board[i]<<endl;
-    // }
+    cout<<"success!!"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        cout<<board[i]<<endl;
+    }
     return true;
 }
 
@@ -590,15 +590,13 @@ int main(int argc, char * argv[])
     if(argc==1)
     {
         file.open("tcga2016-question.txt",ios::in);
-        output.open("result.txt",ios::out);
     }
     else
     {
         file.open(argv[1],ios::in);
-        output.open(argv[2],ios::out);
     }
 
-    
+    output.open("result.txt",ios::in);
     int line_num=0;
 
     
@@ -719,8 +717,8 @@ int main(int argc, char * argv[])
             // {
             //     cout<<guess_board[i]<<endl;
             // }
-            // cout<<"complex_row"<<complex_row<<endl;
-            // cout<<"complex_col"<<complex_col<<endl;
+            cout<<"complex_row"<<complex_row<<endl;
+            cout<<"complex_col"<<complex_col<<endl;
             // if((conplex_row>0)&&(complex_col>0))
             // {
             //     if(complex_row.bigger)
@@ -748,6 +746,8 @@ int main(int argc, char * argv[])
             output<<"$"<<count<<endl;
             output<<result;
 
+            
+
 
             
             // cout<<"board"<<endl;
@@ -767,9 +767,7 @@ int main(int argc, char * argv[])
         }    
         // cout<<ss;
     }
-    cout<<endl<<"time:"<<totaltime<<endl;
-    file.close();  
-    output.close();
+    cout<<endl<<"time:"<<totaltime<<endl;  
 }
 
  
