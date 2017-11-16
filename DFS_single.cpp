@@ -1118,12 +1118,12 @@ bool DFS(int idx_row,int n,vector<vector<int> > &col_hint,vector<int > board,vec
         return true;
     }
     
-    if(!preprocess(idx_row-1,n,board,new_row_pattern,new_col_pattern))
-    {
+    // if(!preprocess(idx_row-1,n,board,new_row_pattern,new_col_pattern))
+    // {
         
-        // cout<<"false:"<<endl;
-        return false;
-    }
+    //     // cout<<"false:"<<endl;
+    //     return false;
+    // }
    
 
     

@@ -617,21 +617,18 @@ int main(int argc, char * argv[])
     file.seekg(0,ios::beg);
     int n=line_num/2;
     
-    string init;
-    for(int i=0;i<n;i++)
-    {
-        init.push_back('*');
-    }
-    for(int i=0;i<n;i++)
-    {
-        guess_board.push_back(init);
-    }
+
     
     vector< vector< vector<int> > > hint_cols;
     vector< vector< vector<int> > > hint_rows;
 
-    vector<vector<string > > row_pattern;
-    vector<vector<string > > col_pattern;
+    
+    for(int i=0;i<n;i++)
+    {
+        vector< vector<int> >tmp;
+        hint_cols.push_back(tmp);
+        hint_rows.push_back(tmp);
+    }
     int count=0;
     file.seekg(0,ios::beg);
     while(getline(file,line))
@@ -669,101 +666,9 @@ int main(int argc, char * argv[])
                 }
                 row.push_back(tmp);
             }
-            count++;
-            // if(count<7)
-            // {
-            //     continue;
-            // }
-            vector<string> tmp;
-            string tmpv="";
-            // cout<<'w'<<endl;
-            for (int i=0;i<n;i++)
-            {
-                
-                row_pattern.push_back(tmp);
-                col_pattern.push_back(tmp);
-                generate_row(i,0,n,row[i],tmpv,row_pattern);
-                generate_col(i,0,n,col[i],tmpv,col_pattern);
-                // cout<<"row_patternsize:"<<row_pattern[i].size()<<endl;
-                // cout<<"col_patternsize:"<<col_pattern[i].size()<<endl;
-            }
+            hint_rows.push_back(row);
+            hint_cols.push_back(col);
 
-            
-            for(int i=0;i<n;i++)
-            {
-                if(!guess(n,row_pattern,col_pattern))
-                {
-                    break;
-                }
-            }
-            
-            long long int complex_row=1;
-            long long int complex_col=1;
-            for(int i=0;i<n;i++)
-            {
-                
-                complex_row*=row_pattern[i].size();
-                complex_col*=col_pattern[i].size();
-                if(complex_row<0||complex_col<0)
-                {
-                    break;
-                }
-            }
-
-            
-            cout<<"prob:"<<count<<endl;
-            // cout<<"guessboard:"<<endl;
-            // for(int i=0;i<n;i++)
-            // {
-            //     cout<<guess_board[i]<<endl;
-            // }
-            cout<<"complex_row"<<complex_row<<endl;
-            cout<<"complex_col"<<complex_col<<endl;
-            // if((conplex_row>0)&&(complex_col>0))
-            // {
-            //     if(complex_row.bigger)
-            //     {
-            //         //row DFS
-            //     }
-            //     else
-            //     {
-            //         //col
-            //     }
-            // }
-            // else if(complex_row>0)
-            // {
-            //     //row DFS
-            // }
-            // else
-            // {
-            //     //col DFS
-            // }
-            vector<string> board;
-            
-            
-            string result="";
-            DFS(0,n,col,board,row_pattern,col_pattern,result);
-            output<<"$"<<count<<endl;
-            output<<result;
-
-            
-
-
-            
-            // cout<<"board"<<endl;
-            //clear pattern for next problem
-            for(int i=0;i<n;i++)
-            {
-                row_pattern[i].clear();
-                col_pattern[i].clear();
-                guess_board[i]=init;
-            }
-            
-            t2=clock();
-            cout<<"subtime:"<<(t2-t1)/(double)(CLOCKS_PER_SEC)<<endl;
-            totaltime+=(t2-t1)/(double)(CLOCKS_PER_SEC);
-            t1=t2;
-            // break;
         }    
         // cout<<ss;
     }
